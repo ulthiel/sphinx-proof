@@ -187,6 +187,15 @@ class unenumerable_node(nodes.Admonition, nodes.Element):
 class assumption_node(nodes.Admonition, nodes.Element):
     pass
 
+class exercise_node(nodes.Admonition, nodes.Element):
+    pass
+
+class aufgabe_node(nodes.Admonition, nodes.Element):
+    pass
+
+class quiz_node(nodes.Admonition, nodes.Element):
+    pass
+
 
 NODE_TYPES = {
     "axiom": axiom_node,
@@ -203,4 +212,7 @@ NODE_TYPES = {
     "observation": observation_node,
     "proposition": proposition_node,
     "assumption": assumption_node,
+    "exercise": exercise_node,
+    "aufgabe": aufgabe_node,
+    "quiz": quiz_node,
 }

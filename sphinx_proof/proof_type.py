@@ -94,6 +94,20 @@ class AssumptionDirective(ElementDirective):
 
     name = "assumption"
 
+class ExerciseDirective(ElementDirective):
+    """A custom exercise directive."""
+
+    name = "exercise"
+
+class AufgabeDirective(ElementDirective):
+    """A custom aufgabe directive."""
+
+    name = "aufgabe"
+
+class QuizDirective(ElementDirective):
+    """A custom quiz directive."""
+
+    name = "quiz"
 
 PROOF_TYPES = {
     "axiom": AxiomDirective,
@@ -110,4 +124,7 @@ PROOF_TYPES = {
     "observation": ObservationDirective,
     "proposition": PropositionDirective,
     "assumption": AssumptionDirective,
+    "exercise": ExerciseDirective,
+    "aufgabe": AufgabeDirective,
+    "quiz": QuizDirective,
 }

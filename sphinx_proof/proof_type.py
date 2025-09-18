@@ -47,7 +47,7 @@ class CorollaryDirective(ElementDirective):
     name = "corollary"
 
 
-class KorllarDirective(ElementDirective):
+class KorollarDirective(ElementDirective):
     """A custom korollar directive."""
 
     name = "korollar"

@@ -47,6 +47,12 @@ class CorollaryDirective(ElementDirective):
     name = "corollary"
 
 
+class KorllarDirective(ElementDirective):
+    """A custom korollar directive."""
+
+    name = "korollar"
+
+
 class AlgorithmDirective(ElementDirective):
     """A custom algorithm directive."""
 
@@ -118,6 +124,7 @@ PROOF_TYPES = {
     "remark": RemarkDirective,
     "conjecture": ConjectureDirective,
     "corollary": CorollaryDirective,
+    "korollar": KorollarDirective,
     "criterion": CriterionDirective,
     "example": ExampleDirective,
     "property": PropertyDirective,

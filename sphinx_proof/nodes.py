@@ -160,6 +160,10 @@ class corollary_node(nodes.Admonition, nodes.Element):
     pass
 
 
+class korollar_node(nodes.Admonition, nodes.Element):
+    pass
+
+
 class criterion_node(nodes.Admonition, nodes.Element):
     pass
 
@@ -206,6 +210,7 @@ NODE_TYPES = {
     "remark": remark_node,
     "conjecture": conjecture_node,
     "corollary": corollary_node,
+    "korollar": korollar_node,
     "criterion": criterion_node,
     "example": example_node,
     "property": property_node,

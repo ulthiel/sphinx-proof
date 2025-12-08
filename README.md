@@ -12,6 +12,10 @@ This package contains a [Sphinx](http://www.sphinx-doc.org/) extension
 for producing proof, theorem, axiom, lemma, definition, criterion, remark, conjecture,
 corollary, algorithm, example, property, observation, proposition and assumption directives.
 
+## Fork by UT
+
+* Added environments "Quiz", "Aufgabe", "Code" (in files nodes.py and proof_type.py)
+
 
 ## Get started
 

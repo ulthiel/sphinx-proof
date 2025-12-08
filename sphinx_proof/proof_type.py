@@ -115,6 +115,11 @@ class QuizDirective(ElementDirective):
 
     name = "quiz"
 
+class CodeDirective(ElementDirective):
+    """A custom code directive."""
+
+    name = "code"
+
 PROOF_TYPES = {
     "axiom": AxiomDirective,
     "theorem": TheoremDirective,
@@ -134,4 +139,5 @@ PROOF_TYPES = {
     "exercise": ExerciseDirective,
     "aufgabe": AufgabeDirective,
     "quiz": QuizDirective,
+    "code": CodeDirective,
 }

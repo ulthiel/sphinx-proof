@@ -200,6 +200,9 @@ class aufgabe_node(nodes.Admonition, nodes.Element):
 class quiz_node(nodes.Admonition, nodes.Element):
     pass
 
+class code_node(nodes.Admonition, nodes.Element):
+    pass
+
 
 NODE_TYPES = {
     "axiom": axiom_node,
@@ -220,4 +223,5 @@ NODE_TYPES = {
     "exercise": exercise_node,
     "aufgabe": aufgabe_node,
     "quiz": quiz_node,
+    "code": code_node,
 }

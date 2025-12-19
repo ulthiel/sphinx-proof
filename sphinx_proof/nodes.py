@@ -203,6 +203,17 @@ class quiz_node(nodes.Admonition, nodes.Element):
 class code_node(nodes.Admonition, nodes.Element):
     pass
 
+class question_node(nodes.Admonition, nodes.Element):
+    pass    
+
+class frage_node(nodes.Admonition, nodes.Element):
+    pass  
+
+class conjecture_node(nodes.Admonition, nodes.Element):
+    pass  
+
+class vermutung_node(nodes.Admonition, nodes.Element):
+    pass  
 
 NODE_TYPES = {
     "axiom": axiom_node,
@@ -224,4 +235,8 @@ NODE_TYPES = {
     "aufgabe": aufgabe_node,
     "quiz": quiz_node,
     "code": code_node,
+    "question": question_node,
+    "frage": frage_node,
+    "conjecture": conjecture_node,
+    "vermutung": vermutung_node,
 }

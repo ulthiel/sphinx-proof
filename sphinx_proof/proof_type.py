@@ -120,6 +120,27 @@ class CodeDirective(ElementDirective):
 
     name = "code"
 
+class QuestionDirective(ElementDirective):
+    """A custom question directive."""
+
+    name = "question"
+
+class FrageDirective(ElementDirective):
+    """A custom frage directive."""
+
+    name = "frage"
+
+class ConjectureDirective(ElementDirective):
+    """A custom conjecture directive."""
+
+    name = "conjecture"
+
+class VermutungDirective(ElementDirective):
+    """A custom vermutung directive."""
+
+    name = "vermutung"
+
+
 PROOF_TYPES = {
     "axiom": AxiomDirective,
     "theorem": TheoremDirective,
@@ -140,4 +161,8 @@ PROOF_TYPES = {
     "aufgabe": AufgabeDirective,
     "quiz": QuizDirective,
     "code": CodeDirective,
+    "question": QuestionDirective,
+    "frage": FrageDirective,
+    "conjecture": ConjectureDirective,
+    "vermutung": VermutungDirective,
 }

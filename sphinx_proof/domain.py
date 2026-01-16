@@ -83,7 +83,7 @@ class ProofDomain(Domain):
 
     indices = {ProofIndex}  # a list of index subclasses
 
-    directives = {**{"proof": ProofDirective, BeweisDirective}, **PROOF_TYPES}  # list of directives
+    directives = {**{"proof": ProofDirective}, **{"beweis": BeweisDirective}, **PROOF_TYPES}  # list of directives
 
     enumerable_nodes = {}  # type: Dict[[Node], Tuple[str, Callable]]
 

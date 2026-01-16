@@ -133,21 +133,22 @@ class ProofDirective(SphinxDirective):
         return [node]
 
 class BeweisDirective(ProofDirective):
-    """German proof directive that prefixes 'Beweis.'"""
+    """German proof directive that reuses proof styling."""
 
     name = "beweis"
 
     def run(self):
-        # This duplicates ProofDirective.run,
-        # but we replace the hardcoded title text.
-        typ = self.name.split(":")[1]   # will be "beweis"
-        classes = ["proof", typ]
+        # force semantic type to 'proof'
+        typ = "proof"
+        classes = ["proof"]
+
         section = nodes.admonition(classes=classes, ids=[typ])
 
-        # This is the only real change:
+        # German heading only
         self.content[0] = "Beweis.\n" + self.content[0]
 
         self.state.nested_parse(self.content, 0, section)
         node = proof_node()
         node += section
         return [node]
+

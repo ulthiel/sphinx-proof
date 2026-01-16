@@ -154,7 +154,7 @@ class BeweisDirective(ProofDirective):
         typ = self.name.split(":")[1]
 
         # If class in options add to class array
-        classes, class_name = ["beweis", typ], self.options.get("class", [])
+        classes, class_name = ["proof", typ], self.options.get("class", [])
         if class_name:
             classes.extend(class_name)
 

@@ -108,7 +108,7 @@ class ProofDirective(SphinxDirective):
     name = "proof"
     has_content = True
     required_arguments = 0
-    optional_arguments = 0
+    optional_arguments = 1
     final_argument_whitespace = True
     option_spec = {
         "class": directives.class_option,
@@ -124,7 +124,13 @@ class ProofDirective(SphinxDirective):
 
         section = nodes.admonition(classes=classes, ids=[typ])
 
-        self.content[0] = "{}. ".format(typ.title()) + self.content[0]
+        if self.arguments:
+            heading = self.arguments[0]
+        else:
+            heading = typ.title()
+        self.content[0] = f"{heading}. " + self.content[0]
+
+
         self.state.nested_parse(self.content, 0, section)
 
         node = proof_node()
@@ -145,7 +151,7 @@ class BeweisDirective(ProofDirective):
         section = nodes.admonition(classes=classes, ids=[typ])
 
         # German heading only
-        self.content[0] = "Beweis.\n" + self.content[0]
+        self.content[0] = "Beweis. " + self.content[0]
 
         self.state.nested_parse(self.content, 0, section)
         node = proof_node()

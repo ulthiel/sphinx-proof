@@ -150,8 +150,11 @@ class BeweisDirective(ProofDirective):
 
         section = nodes.admonition(classes=classes, ids=[typ])
 
-        # German heading only
-        self.content[0] = "Beweis. " + self.content[0]
+        if self.arguments:
+            heading = self.arguments[0]
+        else:
+            heading = typ.title()
+        self.content[0] = f"{heading}. " + self.content[0]
 
         self.state.nested_parse(self.content, 0, section)
         node = proof_node()

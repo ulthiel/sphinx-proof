@@ -16,7 +16,11 @@ corollary, algorithm, example, property, observation, proposition and assumption
 
 * Added environments "Quiz", "Code", "Question", "Conjecture" (in files nodes.py and proof_type.py)
 
+* Added optional argument to proof so that one can use `{prf:proof} Idea of proof` (in directive.py).
+
 * Added German environments "Aufgabe", "Code", "Question", "Frage", "Conjecture", "Vermutung" (in files nodes.py and proof_type.py). Even though there is internationalization, I have added the German versions as separate environments because I use both in the same project and the internationalization does not work on individual files, just globally.
+
+* Added German environment Beweis
 
 
 ## Get started

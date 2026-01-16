@@ -21,7 +21,7 @@ from sphinx.util.nodes import make_refnode
 from sphinx.util import logging
 from sphinx.locale import get_translation
 from docutils import nodes
-from .directive import ProofDirective
+from .directive import ProofDirective, BeweisDirective
 from .proof_type import PROOF_TYPES
 from copy import copy
 

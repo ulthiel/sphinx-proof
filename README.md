@@ -14,7 +14,9 @@ corollary, algorithm, example, property, observation, proposition and assumption
 
 ## Fork by UT
 
-* Added environments "Quiz", "Aufgabe", "Code", "Question", "Frage", "Conjecture", "Vermutung" (in files nodes.py and proof_type.py). Even though there is internationalization, I have added the German versions as separate environments because I use both in the same project and I think the internationalization does not work on individual files, just globally.
+* Added environments "Quiz", "Code", "Question", "Conjecture" (in files nodes.py and proof_type.py)
+
+* Added German environments "Aufgabe", "Code", "Question", "Frage", "Conjecture", "Vermutung" (in files nodes.py and proof_type.py). Even though there is internationalization, I have added the German versions as separate environments because I use both in the same project and the internationalization does not work on individual files, just globally.
 
 
 ## Get started

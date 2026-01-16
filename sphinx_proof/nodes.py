@@ -215,6 +215,12 @@ class conjecture_node(nodes.Admonition, nodes.Element):
 class vermutung_node(nodes.Admonition, nodes.Element):
     pass  
 
+class bemerkung_node(nodes.Admonition, nodes.Element):
+    pass 
+
+class beobachtung_node(nodes.Admonition, nodes.Element):
+    pass 
+
 NODE_TYPES = {
     "axiom": axiom_node,
     "theorem": theorem_node,
@@ -239,4 +245,6 @@ NODE_TYPES = {
     "frage": frage_node,
     "conjecture": conjecture_node,
     "vermutung": vermutung_node,
+    "bemerkung": bemerkung_node,
+    "beobachtung": beobachtung_node,
 }

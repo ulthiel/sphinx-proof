@@ -131,3 +131,23 @@ class ProofDirective(SphinxDirective):
         node += section
 
         return [node]
+
+class BeweisDirective(ProofDirective):
+    """German proof directive that prefixes 'Beweis.'"""
+
+    name = "beweis"
+
+    def run(self):
+        # This duplicates ProofDirective.run,
+        # but we replace the hardcoded title text.
+        typ = self.name.split(":")[1]   # will be "beweis"
+        classes = ["proof", typ]
+        section = nodes.admonition(classes=classes, ids=[typ])
+
+        # This is the only real change:
+        self.content[0] = "Beweis.\n" + self.content[0]
+
+        self.state.nested_parse(self.content, 0, section)
+        node = proof_node()
+        node += section
+        return [node]

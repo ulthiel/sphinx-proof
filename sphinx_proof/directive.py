@@ -142,11 +142,21 @@ class BeweisDirective(ProofDirective):
     """German proof directive that reuses proof styling."""
 
     name = "beweis"
+    has_content = True
+    required_arguments = 0
+    optional_arguments = 1
+    final_argument_whitespace = True
+    option_spec = {
+        "class": directives.class_option,
+    }
 
-    def run(self):
-        # force semantic type to 'proof'
-        typ = "proof"
-        classes = ["proof"]
+    def run(self) -> List[Node]:
+        typ = self.name.split(":")[1]
+
+        # If class in options add to class array
+        classes, class_name = ["beweis", typ], self.options.get("class", [])
+        if class_name:
+            classes.extend(class_name)
 
         section = nodes.admonition(classes=classes, ids=[typ])
 
@@ -156,8 +166,11 @@ class BeweisDirective(ProofDirective):
             heading = typ.title()
         self.content[0] = f"{heading}. " + self.content[0]
 
+
         self.state.nested_parse(self.content, 0, section)
+
         node = proof_node()
         node += section
+
         return [node]
 

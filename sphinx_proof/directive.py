@@ -37,7 +37,7 @@ class ElementDirective(SphinxDirective):
     def run(self) -> List[Node]:
         env = self.env
         typ = self.name.split(":")[1]
-        serial_no = env.new_serialno()
+        serial_no = env.new_serialno(typ)
         if not hasattr(env, "proof_list"):
             env.proof_list = {}
 

@@ -20,7 +20,77 @@ corollary, algorithm, example, property, observation, proposition and assumption
 
 * Added German environments "Aufgabe", "Code", "Question", "Frage", "Conjecture", "Vermutung" (in files nodes.py and proof_type.py). Even though there is internationalization, I have added the German versions as separate environments because I use both in the same project and the internationalization does not work on individual files, just globally.
 
-* Added German environment Beweis
+* Added German environment Beweis `{prf:beweis}`.
+
+To get nice icons you can add the following to your custom.css:
+
+```css
+/* Icons for sphinx-proof stuff 
+   Suggested mostly by ChatGPT :-) */
+
+/* fa-scroll: Classical mathematics vibe */
+div.proof.theorem p.admonition-title::after {
+  content: "\f70e";
+}
+
+/* fa-shapes: Suggests structure and building blocks. */
+div.proof.proposition p.admonition-title::after {
+  content: "\f61f";
+}
+
+/* fa-lightbulb: A lemma is a “smart little insight” that supports a theorem, so this reads well visually. */
+div.proof.lemma p.admonition-title::after {
+  content: "\f0eb";
+}
+
+/* fa-arrow-turn-down-right: Indicates a conclusion that follows straight from something else. */
+div.proof.corollary p.admonition-title::after {
+  content: "\f3be";
+}
+
+div.proof.korollar p.admonition-title::after {
+  content: "\f058";
+}
+
+/* fa-book-open: “Opening the book” to define something. */
+div.proof.definition p.admonition-title::after {
+  content: "\f518";
+}
+
+div.admonition-question p.admonition-title::after {
+  content: "\f059";
+}
+
+/* Brain */
+div.proof.quiz p.admonition-title::after {
+  content: "\f5dc";
+}
+
+/* Pencil */
+div.proof.exercise p.admonition-title::after {
+  content: "\f303";
+}
+
+div.proof.aufgabe p.admonition-title::after {
+  content: "\f303";
+}
+
+/* fa-flask: Examples act like experiments or demonstrations */
+div.proof.example p.admonition-title::after {
+  content: "\f0c3";
+}
+
+div.proof.code p.admonition-title::after {
+  content: "\f120";
+}
+
+/* Make all sphinx-proof proof admonitions look like #proof */
+div.admonition.proof {
+  padding: .4rem .6rem .4rem 2rem !important;
+  border-color: var(--grey-border-color);
+  background-color: none;
+}
+```
 
 
 ## Get started

@@ -237,6 +237,7 @@ NODE_TYPES = {
     "observation": observation_node,
     "proposition": proposition_node,
     "assumption": assumption_node,
+    "annahme": annahme_node,
     "exercise": exercise_node,
     "aufgabe": aufgabe_node,
     "quiz": quiz_node,
@@ -247,4 +248,5 @@ NODE_TYPES = {
     "vermutung": vermutung_node,
     "bemerkung": bemerkung_node,
     "beobachtung": beobachtung_node,
+    "beispiel": beispiel_node,
 }

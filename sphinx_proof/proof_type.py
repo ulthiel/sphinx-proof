@@ -150,6 +150,16 @@ class BeobachtungDirective(ElementDirective):
 
     name = "beobachtung"
 
+class BeispielDirective(ElementDirective):
+    """A custom beispiel directive."""
+
+    name = "beispiel"
+
+class AnnahmeDirective(ElementDirective):
+    """A custom annahme directive."""
+
+    name = "annahme"
+
 PROOF_TYPES = {
     "axiom": AxiomDirective,
     "theorem": TheoremDirective,
@@ -176,4 +186,6 @@ PROOF_TYPES = {
     "vermutung": VermutungDirective,
     "bemerkung": BemerkungDirective,
     "beobachtung": BeobachtungDirective,
+    "beispiel": BeispielDirective,
+    "annahme": AnnahmeDirective,
 }

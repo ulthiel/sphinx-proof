@@ -221,6 +221,12 @@ class bemerkung_node(nodes.Admonition, nodes.Element):
 class beobachtung_node(nodes.Admonition, nodes.Element):
     pass 
 
+class beispiel_node(nodes.Admonition, nodes.Element):
+    pass 
+
+class annahme_node(nodes.Admonition, nodes.Element):
+    pass 
+
 NODE_TYPES = {
     "axiom": axiom_node,
     "theorem": theorem_node,

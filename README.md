@@ -9,18 +9,15 @@
 **A proof extension for Sphinx**.
 
 This package contains a [Sphinx](http://www.sphinx-doc.org/) extension
-for producing proof, theorem, axiom, lemma, definition, criterion, remark, conjecture,
-corollary, algorithm, example, property, observation, proposition and assumption directives.
+for producing proof, theorem, axiom, lemma, definition, criterion, remark, conjecture, corollary, algorithm, example, property, observation, proposition and assumption directives.
 
 ## Fork by UT
 
-* Added environments "Quiz", "Code", "Question", "Conjecture" (in files nodes.py and proof_type.py)
+* Added environments "Quiz", "Code", "Question", "Conjecture", "Convention" (in files nodes.py and proof_type.py)
 
 * Added optional argument to proof so that one can use `{prf:proof} Idea of proof` (in directive.py).
 
-* Added German environments "Aufgabe", "Code", "Question", "Frage", "Conjecture", "Vermutung" (in files nodes.py and proof_type.py). Even though there is internationalization, I have added the German versions as separate environments because I use both in the same project and the internationalization does not work on individual files, just globally.
-
-* Added German environment Beweis `{prf:beweis}`.
+* Added complementary German environment versions (in files nodes.py and proof_type.py). Even though there is internationalization, I have added the German versions as separate environments because I use both in the same project and the internationalization does not work on individual files, just globally.
 
 To get nice icons you can add the following to your custom.css:
 

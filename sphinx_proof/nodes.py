@@ -227,6 +227,12 @@ class beispiel_node(nodes.Admonition, nodes.Element):
 class annahme_node(nodes.Admonition, nodes.Element):
     pass 
 
+class convention_node(nodes.Admonition, nodes.Element):
+    pass 
+
+class konvention_node(nodes.Admonition, nodes.Element):
+    pass 
+
 NODE_TYPES = {
     "axiom": axiom_node,
     "theorem": theorem_node,
@@ -255,4 +261,6 @@ NODE_TYPES = {
     "bemerkung": bemerkung_node,
     "beobachtung": beobachtung_node,
     "beispiel": beispiel_node,
+    "convention": convention_node,
+    "konvention": konvention_node,
 }

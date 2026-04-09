@@ -160,6 +160,16 @@ class AnnahmeDirective(ElementDirective):
 
     name = "annahme"
 
+class ConventionDirective(ElementDirective):
+    """A custom convention directive."""
+
+    name = "convention"
+
+class KonventionDirective(ElementDirective):
+    """A custom konvention directive."""
+
+    name = "konvention"
+
 PROOF_TYPES = {
     "axiom": AxiomDirective,
     "theorem": TheoremDirective,
@@ -188,4 +198,6 @@ PROOF_TYPES = {
     "beobachtung": BeobachtungDirective,
     "beispiel": BeispielDirective,
     "annahme": AnnahmeDirective,
+    "convention": ConventionDirective,
+    "konvention": KonventionDirective,
 }

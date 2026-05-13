@@ -233,6 +233,9 @@ class convention_node(nodes.Admonition, nodes.Element):
 class konvention_node(nodes.Admonition, nodes.Element):
     pass 
 
+class algorithmus_node(nodes.Admonition, nodes.Element):
+    pass 
+
 NODE_TYPES = {
     "axiom": axiom_node,
     "theorem": theorem_node,
@@ -263,4 +266,5 @@ NODE_TYPES = {
     "beispiel": beispiel_node,
     "convention": convention_node,
     "konvention": konvention_node,
+    "algorithmus": algorithmus_node,
 }

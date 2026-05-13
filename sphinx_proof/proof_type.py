@@ -170,6 +170,11 @@ class KonventionDirective(ElementDirective):
 
     name = "konvention"
 
+class AlgorithmusDirective(ElementDirective):
+    """A custom algorithmus directive."""
+
+    name = "algorithmus"
+
 PROOF_TYPES = {
     "axiom": AxiomDirective,
     "theorem": TheoremDirective,
@@ -200,4 +205,5 @@ PROOF_TYPES = {
     "annahme": AnnahmeDirective,
     "convention": ConventionDirective,
     "konvention": KonventionDirective,
+    "algorithmus": AlgorithmusDirective,
 }

@@ -23,6 +23,7 @@ from sphinx.locale import get_translation
 from docutils import nodes
 from .directive import ProofDirective, BeweisDirective
 from .proof_type import PROOF_TYPES
+from .numbering import get_counter_type
 from copy import copy
 
 logger = logging.getLogger(__name__)
@@ -157,7 +158,7 @@ class ProofDomain(Domain):
             if target in contnode[0]:
                 number = ""
                 if not env.proof_list[target]["nonumber"]:
-                    typ = env.proof_list[target]["type"]
+                    typ = get_counter_type(env.config, match["type"])
                     number = ".".join(
                         map(str, env.toc_fignumbers[todocname][typ][target])
                     )

@@ -6,7 +6,7 @@
 install
 syntax
 options
-Internationalization
+internationalization
 testing
 zreferences
 ```

@@ -19,6 +19,8 @@ for producing proof, theorem, axiom, lemma, definition, criterion, remark, conje
 
 * Added complementary German environment versions (in files nodes.py and proof_type.py). Even though there is internationalization, I have added the German versions as separate environments because I use both in the same project and the internationalization does not work on individual files, just globally.
 
+* Added optional shared numbering: set `proof_shared_counter = True` in Sphinx's `conf.py`, or `proof_shared_counter: true` under `sphinx.config` in Jupyter Book v1's `_config.yml`. All numbered proof environments then share one sequence, including English and German environments. The default remains independent numbering. See [Options](docs/source/options.md) for details.
+
 To get nice icons you can add the following to your custom.css:
 
 ```css

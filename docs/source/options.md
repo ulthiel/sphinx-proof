@@ -74,6 +74,46 @@ A lemma following the example.
 
 See {prf:ref}`shared-counter-lemma`.
 
+## Default statement style
+
+Set `proof_default_class` to apply a CSS class to statement environments without
+repeating `:class:` in each directive. For example, `note` uses the theme's note
+admonition style, including its title background in themes that provide one.
+
+For a Sphinx project, add this to `conf.py`:
+
+```python
+proof_default_class = "note"
+```
+
+For a Jupyter Book v1 project, add this to `_config.yml`:
+
+```yaml
+sphinx:
+  config:
+    proof_default_class: note
+```
+
+The setting applies to all statement environments, including their German
+counterparts and environments with `:nonumber:`. It does not change the styling
+of `prf:proof` or `prf:beweis`. Numbering, labels, and references are unaffected.
+
+An explicit `:class:` replaces the configured default. For example, this remark
+uses the warning style even when `proof_default_class` is `note`:
+
+````markdown
+```{prf:remark}
+:class: warning
+
+This remark deserves special attention.
+```
+````
+
+Custom CSS classes are supported, and a whitespace-separated string applies
+several classes, just as with `:class:`. The default is the empty string, which
+adds no classes and preserves the usual styling. Changing the setting rebuilds
+existing statement environments without requiring edits to the source pages.
+
 ## Minimal color scheme
 
 This package has the option to choose a more **minimal** color scheme.

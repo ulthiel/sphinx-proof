@@ -41,10 +41,11 @@ class ElementDirective(SphinxDirective):
         if not hasattr(env, "proof_list"):
             env.proof_list = {}
 
-        # If class in options add to class array
-        classes, class_name = ["proof", typ], self.options.get("class", [])
-        if class_name:
-            classes.extend(class_name)
+        classes = ["proof", typ]
+        if "class" in self.options:
+            classes.extend(self.options["class"])
+        elif env.config.proof_default_class:
+            classes.extend(directives.class_option(env.config.proof_default_class))
 
         label = self.options.get("label", "")
         # If label

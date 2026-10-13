@@ -21,6 +21,8 @@ for producing proof, theorem, axiom, lemma, definition, criterion, remark, conje
 
 * Added optional shared numbering: set `proof_shared_counter = True` in Sphinx's `conf.py`, or `proof_shared_counter: true` under `sphinx.config` in Jupyter Book v1's `_config.yml`. All numbered proof environments then share one sequence, including English and German environments. The default remains independent numbering. See [Options](docs/source/options.md) for details.
 
+* Added an optional default statement style: set `proof_default_class = "note"` in Sphinx's `conf.py`, or `proof_default_class: note` under `sphinx.config` in Jupyter Book v1's `_config.yml`. Explicit `:class:` options override the default; proofs and Beweise keep their own styling. The default is disabled. See [Options](docs/source/options.md) for details.
+
 To get nice icons you can add the following to your custom.css:
 
 ```css

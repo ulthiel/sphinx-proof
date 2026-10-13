@@ -145,7 +145,8 @@ def test_conditional_numbers(make_app, app_params, solutions, private, warnings)
     assert_block(soup, "theorem-b", "Theorem 1.1.9")
 
 
-def test_all_environment_types(make_app, app_params, tmp_path, warnings):
+@pytest.mark.parametrize("default_class", [None, "note"])
+def test_all_environment_types(make_app, app_params, tmp_path, warnings, default_class):
     source_dir = tmp_path / "all-types"
     source_dir.mkdir()
     (source_dir / "conf.py").write_text(
@@ -156,12 +157,18 @@ def test_all_environment_types(make_app, app_params, tmp_path, warnings):
         source += ".. prf:" + typ + "::\n   :label: " + typ + "-label\n\n   Text.\n\n"
     (source_dir / "index.rst").write_text(source)
     srcdir = type(app_params.kwargs["srcdir"])(str(source_dir))
-    app = make_app(srcdir=srcdir, buildername="html", freshenv=True)
+    config = {} if default_class is None else {"proof_default_class": default_class}
+    app = make_app(
+        srcdir=srcdir, buildername="html", freshenv=True, confoverrides=config
+    )
     app.build()
     assert warnings(app) == ""
     soup = read_html(app, "index")
     for number, typ in enumerate(PROOF_TYPES, 1):
         assert_block(soup, typ + "-label", typ.title() + " " + str(number) + " ")
+        assert ("note" in soup.find(id=typ + "-label")["class"]) == (
+            default_class == "note"
+        )
 
 
 def test_rebuild_after_switching_mode(make_app, app_params, warnings):
@@ -216,3 +223,73 @@ def test_incremental_reference_numbers(make_app, app_params, warnings):
             == "Theorem 1.1.10"
         )
         app.cleanup()
+
+
+def test_default_class_overrides(make_app, app_params, tmp_path, warnings):
+    source_dir = tmp_path / "default-class"
+    source_dir.mkdir()
+    (source_dir / "conf.py").write_text('extensions = ["sphinx_proof"]\n')
+    (source_dir / "index.rst").write_text(
+        "Default styles\n==============\n\n"
+        ".. prf:definition::\n   :label: default-style\n\n   Text.\n\n"
+        ".. prf:remark::\n   :label: unnumbered-style\n"
+        "   :nonumber:\n\n   Text.\n\n"
+        ".. prf:example::\n   :label: warning-style\n"
+        "   :class: warning custom-style\n\n   Text.\n\n"
+        ".. prf:lemma::\n   :label: custom-style\n"
+        "   :class: custom-style\n\n   Text.\n\n"
+        ".. prf:proof::\n\n   Proof text.\n\n"
+        ".. prf:beweis::\n\n   Beweis text.\n"
+    )
+    srcdir = type(app_params.kwargs["srcdir"])(str(source_dir))
+    app = make_app(
+        srcdir=srcdir,
+        buildername="html",
+        freshenv=True,
+        confoverrides={"proof_default_class": "note custom-default"},
+    )
+    app.build()
+    assert warnings(app) == ""
+    soup = read_html(app, "index")
+    for label in ["default-style", "unnumbered-style"]:
+        classes = soup.find(id=label)["class"]
+        assert "note" in classes
+        assert "custom-default" in classes
+    for label in ["warning-style", "custom-style"]:
+        classes = soup.find(id=label)["class"]
+        assert "custom-style" in classes
+        assert "note" not in classes
+        assert "custom-default" not in classes
+    assert "warning" in soup.find(id="warning-style")["class"]
+    for typ in ["proof", "beweis"]:
+        classes = soup.find(id=typ)["class"]
+        assert "note" not in classes
+        assert "custom-default" not in classes
+    assert_block(soup, "unnumbered-style", "Remark")
+    assert "1" not in soup.find(id="unnumbered-style").get_text()
+
+
+@pytest.mark.sphinx(srcdir="default-class-incremental")
+def test_rebuild_after_switching_default_class(make_app, app_params, warnings):
+    srcdir = app_params.kwargs["srcdir"]
+    for default_class in ["", "note", "warning", ""]:
+        with docutils_namespace():
+            app = make_app(
+                srcdir=srcdir,
+                buildername="html",
+                confoverrides={"proof_default_class": default_class},
+            )
+            app.build()
+            assert warnings(app) == ""
+            first = read_html(app, "first")
+            for label in ["definition-a", "unnumbered-remark"]:
+                classes = first.find(id=label)["class"]
+                for style in ["note", "warning"]:
+                    assert (style in classes) == (style == default_class)
+            assert_block(first, "theorem-a", "Theorem 1.1.1")
+            assert "note" not in first.find(id="proof")["class"]
+            assert "warning" not in first.find(id="proof")["class"]
+            second = read_html(app, "second")
+            assert "note" not in second.find(id="beweis")["class"]
+            assert "warning" not in second.find(id="beweis")["class"]
+            app.cleanup()

@@ -12,6 +12,7 @@ from sphinx.config import Config
 from sphinx.application import Sphinx
 from sphinx.locale import get_translation
 from sphinx.environment import BuildEnvironment
+from sphinx.addnodes import pending_xref
 from .nodes import visit_enumerable_node, depart_enumerable_node
 from .nodes import (
     NODE_TYPES,
@@ -22,6 +23,7 @@ from .nodes import (
 from .nodes import proof_node, visit_proof_node, depart_proof_node
 from .domain import ProofDomain
 from .proof_type import PROOF_TYPES
+from .numbering import get_counter_type
 from sphinx.util import logging
 from sphinx.util.fileutil import copy_asset
 
@@ -59,8 +61,40 @@ def init_numfig(app: Sphinx, config: Config) -> None:
     numfig_format = {}
     for typ in NODE_TYPES.keys():
         numfig_format[typ] = typ + " %s"
+    if config.proof_shared_counter:
+        numfig_format["proof"] = "Statement %s"
+        for typ in PROOF_TYPES:
+            app.add_enumerable_node(
+                NODE_TYPES[typ],
+                get_counter_type(config, typ),
+                None,
+                override=True,
+                html=(visit_enumerable_node, depart_enumerable_node),
+                latex=(visit_enumerable_node, depart_enumerable_node),
+            )
     numfig_format.update(config.numfig_format)
     config.numfig_format = numfig_format
+
+
+def update_proof_dependencies(app: Sphinx, env: BuildEnvironment):
+    """Rewrite referring pages when shared numbers change in another document."""
+    if env.config.proof_shared_counter and hasattr(env, "proof_list"):
+        for docname in env.found_docs:
+            doctree = env.get_doctree(docname)
+            references = (
+                doctree.findall(pending_xref)
+                if hasattr(doctree, "findall")
+                else doctree.traverse(pending_xref)
+            )
+            for ref in references:
+                if ref.get("refdomain") != "prf":
+                    continue
+                target = env.proof_list.get(ref.get("reftarget"))
+                if target is not None and target["docname"] != docname:
+                    env.files_to_rebuild.setdefault(target["docname"], set()).add(
+                        docname
+                    )
+    return []
 
 
 def copy_asset_files(app: Sphinx, exc: Union[bool, Exception]):
@@ -81,12 +115,14 @@ def copy_asset_files(app: Sphinx, exc: Union[bool, Exception]):
 def setup(app: Sphinx) -> Dict[str, Any]:
 
     app.add_config_value("proof_minimal_theme", False, "html")
+    app.add_config_value("proof_shared_counter", False, "env", types=[bool])
 
     app.add_css_file("proof.css")
     app.connect("build-finished", copy_asset_files)
     app.connect("config-inited", init_numfig)
     app.connect("env-purge-doc", purge_proofs)
     app.connect("env-merge-info", merge_proofs)
+    app.connect("env-get-updated", update_proof_dependencies, priority=600)
 
     # add translations
     package_dir = os.path.abspath(os.path.dirname(__file__))
